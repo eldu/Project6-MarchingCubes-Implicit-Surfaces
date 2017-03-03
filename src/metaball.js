@@ -46,9 +46,9 @@ export default class Metaball {
     var npos = new THREE.Vector3().addVectors(this.pos, this.vel);
     this.mesh.position.set(npos.x, npos.y, npos.z);
 
-    var upperBound = this.gridWidth - this.offset;
-    this.vel.x *= -1 * Toolbox.step(this.offset, 0.0) * Toolbox.step(Toolbox.step(upperbound, npos.x);
-    this.vel.y *= -1 * Toolbox.step(this.offset, 0.0) * Toolbox.step(upperbound, npos.y);
-    this.vel.z *= -1 * Toolbox.step(this.offset, 0.0) * Toolbox.step(upperbound, npos.z);
+    var upperbound = this.gridWidth - this.offset;
+    this.vel.x += -1.0 * Toolbox.step(npos.x, this.offset) * Toolbox.step(upperbound, npos.x) * this.vel.x;
+    this.vel.y += -1.0 * Toolbox.step(npos.y, this.offset) * Toolbox.step(upperbound, npos.y) * this.vel.y;
+    this.vel.z += -1.0 * Toolbox.step(npos.z, this.offset) * Toolbox.step(upperbound, npos.z) * this.vel.z;
   }
 }
