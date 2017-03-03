@@ -1,4 +1,5 @@
 const THREE = require('three')
+import Toolbox from './toolbox'
 
 var SPHERE_GEO = new THREE.SphereBufferGeometry(1, 32, 32);
 var LAMBERT_WHITE = new THREE.MeshLambertMaterial( { color: 0x9EB3D8, transparent: true, opacity: 0.5 });
@@ -41,6 +42,11 @@ export default class Metaball {
   };
 
   update() {
-    // @TODO
+    var npos = new THREE.Vector3().addVectors(this.pos, this.vel);
+    this.mesh.position.set(npos.x, npos.y, npos.z);
+
+    this.vel.x *= -Toolbox.step(this.gridWidth, npos.x);
+    this.vel.y *= -Toolbox.step(this.gridWidth, npos.y);
+    this.vel.z *= -Toolbox.step(this.gridWidth, npos.z);
   }
 }
