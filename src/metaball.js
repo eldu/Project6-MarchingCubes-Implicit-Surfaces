@@ -18,6 +18,8 @@ export default class Metaball {
     this.radius2 = radius * radius;
     this.mesh = null;
     this.offset = radius * 1.5; // offset for boundary against the walls
+    this.upperbound = this.gridWidth - this.offset;
+    // lowerbound is just the offset
 
     if (visualDebug) {      
       this.makeMesh();
@@ -47,9 +49,28 @@ export default class Metaball {
     this.pos = npos;
     this.mesh.position.set(npos.x, npos.y, npos.z);
 
-    var upperbound = this.gridWidth - this.offset;
-    this.vel.x += -1.0 * Toolbox.step(npos.x, this.offset) * Toolbox.step(upperbound, npos.x) * this.vel.x;
-    this.vel.y += -1.0 * Toolbox.step(npos.y, this.offset) * Toolbox.step(upperbound, npos.y) * this.vel.y;
-    this.vel.z += -1.0 * Toolbox.step(npos.z, this.offset) * Toolbox.step(upperbound, npos.z) * this.vel.z;
+    this.vel.x += -2.0 * (Toolbox.step(npos.x, this.offset) + Toolbox.step(this.upperbound, npos.x)) * this.vel.x;
+    this.vel.y += -2.0 * (Toolbox.step(npos.y, this.offset) + Toolbox.step(this.upperbound, npos.y)) * this.vel.y;
+    this.vel.z += -2.0 * (Toolbox.step(npos.z, this.offset) + Toolbox.step(this.upperbound, npos.z)) * this.vel.z;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

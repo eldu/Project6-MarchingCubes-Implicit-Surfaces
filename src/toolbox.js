@@ -6,7 +6,7 @@ function clamp(x, a, b) {
 }
 
 function step(edge0, x) {
-	return (Math.sign(x - edge0) + 1.0) / 2.0;
+	return clamp(Math.sign(x - edge0), 0.0, 1.0);
 }
 
 function smoothstep(edge0, edge1, x) {
